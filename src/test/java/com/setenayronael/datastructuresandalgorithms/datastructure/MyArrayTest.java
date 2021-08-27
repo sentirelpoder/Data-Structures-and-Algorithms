@@ -5,7 +5,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MyArrayTests {
+//TODO solve Sonar issues and problems
+class MyArrayTest {
 
     MyArray<String> myArray;
 
@@ -15,7 +16,8 @@ class MyArrayTests {
     }
 
 
-    //TODO initialize test for finalize, getClass, notify, notifyAll, wait, wait, wait, parallelStream, stream
+    //TODO write tests for Methods inherited from class java.lang.Object
+    //TODO finalize, getClass, notify, notifyAll, wait, wait, wait, parallelStream, stream
 
     /*
      *
