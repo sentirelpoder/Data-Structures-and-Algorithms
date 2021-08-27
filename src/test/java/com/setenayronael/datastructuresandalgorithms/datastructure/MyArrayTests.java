@@ -1,10 +1,18 @@
 package com.setenayronael.datastructuresandalgorithms.datastructure;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MyArrayTests {
+
+    MyArray<String> myArray;
+
+    @BeforeEach
+    void initialize() {
+        myArray = new MyArray<>();
+    }
 
 
     //TODO initialize test for finalize, getClass, notify, notifyAll, wait, wait, wait, parallelStream, stream
@@ -58,7 +66,15 @@ class MyArrayTests {
      */
     @Test
     void testAdd(){
-        fail();
+        myArray.add("testAdd0");
+        myArray.add("testAdd1");
+        myArray.add("testAdd2");
+        myArray.add("testAdd3");
+        assertAll(() -> assertEquals(4,this.myArray.size()),
+                () -> assertEquals("testAdd0", this.myArray.get(0)),
+                () -> assertEquals("testAdd1", this.myArray.get(1)),
+                () -> assertEquals("testAdd2",this.myArray.get(2)),
+                () -> assertEquals("testAdd3",this.myArray.get(3)));
     }
 
     /**
@@ -67,7 +83,32 @@ class MyArrayTests {
      */
     @Test
     void testAddIndex(){
-        fail();
+        myArray.add("testAdd1");
+        myArray.add("testAdd3");
+        myArray.add("testAdd4");
+        myArray.add("testAdd5");
+        myArray.add(4,"testAdd6");
+        myArray.add(0,"testAdd0");
+        myArray.add(2,"testAdd2");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            this.myArray.add(-3, "testIllegal");
+        });
+
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
+            this.myArray.add(15, "testOutOfBound");
+        });
+
+        assertAll(() -> assertEquals(7, this.myArray.size()),
+                () -> assertEquals("testAdd0", this.myArray.get(0)),
+                () -> assertEquals("testAdd1", this.myArray.get(1)),
+                () -> assertEquals("testAdd2",this.myArray.get(2)),
+                () -> assertEquals("testAdd2",this.myArray.get(3)),
+                () -> assertEquals("testAdd2",this.myArray.get(4)),
+                () -> assertEquals("testAdd2",this.myArray.get(5)),
+                () -> assertEquals("testAdd2",this.myArray.get(6))
+
+);
     }
 
     /**
@@ -134,7 +175,33 @@ class MyArrayTests {
      */
     @Test
     void testGet(){
-        fail();
+        assertThrows(IllegalArgumentException.class, () -> {
+            this.myArray.get(-3);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            this.myArray.get(-1);
+        });
+
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
+            this.myArray.get(0);
+        });
+
+
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
+            this.myArray.get(4);
+        });
+
+        this.myArray.add("testGet0");
+        this.myArray.add("testGet1");
+        this.myArray.add("testGet2");
+        this.myArray.add("testGet3");
+
+        assertAll("Get method didn't turn right element",
+                () -> assertEquals("testGet0", this.myArray.get(0)),
+                () -> assertEquals("testGet1", this.myArray.get(1)),
+                () -> assertEquals("testGet2", this.myArray.get(2)),
+                () -> assertEquals("testGet3", this.myArray.get(3)));
     }
 
     /**
@@ -198,7 +265,40 @@ class MyArrayTests {
      */
     @Test
     void testRemove(){
-        fail();
+        assertThrows(IllegalArgumentException.class, () -> {
+            this.myArray.remove(-3);
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            this.myArray.remove(-1);
+        });
+
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
+            this.myArray.remove(0);
+        });
+
+        assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
+            this.myArray.remove(4);
+        });
+
+        this.myArray.add("testRemove0");
+        this.myArray.add("testRemoveRemoval1");
+        this.myArray.add("testRemove1");
+        this.myArray.add("testRemove2");
+
+        assertEquals("testRemoveRemoval1", this.myArray.remove(1));
+
+        this.myArray.add("testRemove3");
+        this.myArray.add("testRemoveRemoval2");
+
+        assertEquals( "testRemoveRemoval2", this.myArray.remove(4));
+
+        assertAll("Get method didn't turn right element",
+                () -> assertEquals("testRemove0",this.myArray.get(0)),
+                () -> assertEquals("testRemove1",this.myArray.get(1)),
+                () -> assertEquals("testRemove2",this.myArray.get(2)),
+                () -> assertEquals("testRemove3",this.myArray.get(3))
+               );
     }
 
     /**
@@ -270,8 +370,13 @@ class MyArrayTests {
      * Returns the number of elements in this list.
      */
     @Test
-    void testSize(){
-        fail();
+    void testSize() {
+        assertEquals(0, myArray.size());
+        myArray.add("testSize1");
+        myArray.add("testSize2");
+        myArray.add("testSize3");
+        myArray.add("testSize4");
+        assertEquals(4, myArray.size());
     }
 
     /**
